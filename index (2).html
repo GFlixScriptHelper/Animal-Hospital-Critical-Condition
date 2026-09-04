@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GingerFlix Studios — Animal Hospital: Critical Condition</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Inter:wght@900&display=swap');
+
+:root{
+  --bg: #050a13;
+  --bg2: #0a1424;
+  --panel: #0d1a2e;
+  --blue: #1c3a5e;
+  --blue-glow: #4a90c2;
+  --blue-bright: #8fc3e8;
+  --blood: #a11c24;
+  --blood-bright: #d63b3b;
+  --ink: #c7dbec;
+  --ink-dim: #6d84a0;
+}
+
+*{ box-sizing: border-box; margin:0; padding:0; }
+
+body{
+  font-family: 'Fuzzy Bubbles', cursive;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.65) 100%);
+}
+
+h1,h2,h3,h4,p,a,span,li,button,td,th{
+  font-family: 'Fuzzy Bubbles', cursive;
+}
+
+a{ text-decoration: none; color: inherit; }
+
+/* ---------- flickering fog blobs ---------- */
+.blob{
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+  opacity: 0.18;
+  filter: blur(4px);
+  animation: flicker 6s ease-in-out infinite;
+}
+@keyframes flicker{
+  0%,100%{ opacity: 0.10; }
+  40%{ opacity: 0.22; }
+  52%{ opacity: 0.05; }
+  70%{ opacity: 0.20; }
+}
+@media (prefers-reduced-motion: reduce){
+  .blob{ animation: none; }
+}
+
+/* ---------- nav ---------- */
+nav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 6vw;
+  background: var(--bg2);
+  border-bottom: 2px solid var(--blue);
+}
+.logo{
+  font-family: 'Kabel', 'Century Gothic', 'Futura', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue-bright);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.5px;
+}
+.logo .dot{
+  width: 12px; height: 12px;
+  background: var(--blood-bright);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px var(--blood-bright);
+}
+.nav-links{
+  display: flex;
+  gap: 28px;
+  font-size: 1.05rem;
+}
+.nav-links a{
+  color: var(--ink-dim);
+  transition: color .2s ease;
+}
+.nav-links a:hover{ color: var(--blue-bright); }
+
+/* ---------- hero ---------- */
+.hero{
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8vh 6vw 6vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 30%, var(--panel) 0%, var(--bg) 70%);
+}
+.hero .eyebrow{
+  background: var(--panel);
+  border: 1px solid var(--blue);
+  color: var(--ink-dim);
+  padding: 8px 22px;
+  border-radius: 999px;
+  font-size: 1rem;
+  margin-bottom: 26px;
+  letter-spacing: 1px;
+}
+.hero h1{
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 6.5vw, 4.6rem);
+  color: var(--blue-bright);
+  line-height: 1.08;
+  max-width: 18ch;
+  text-shadow:
+    0 0 12px rgba(74,144,194,0.55),
+    0 0 30px rgba(74,144,194,0.25);
+  animation: titleFlicker 5s infinite;
+}
+@keyframes titleFlicker{
+  0%,93%,100%{ opacity: 1; }
+  94%{ opacity: 0.75; }
+  95%{ opacity: 1; }
+  96%{ opacity: 0.5; }
+  97%{ opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero h1{ animation: none; }
+}
+.hero h1 .cross{
+  color: var(--blood-bright);
+  text-shadow: 0 0 14px rgba(214,59,59,0.7);
+}
+.hero p.tagline{
+  margin-top: 22px;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  max-width: 46ch;
+  color: var(--ink-dim);
+}
+.hero .cta-row{
+  margin-top: 36px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn{
+  font-size: 1.1rem;
+  padding: 14px 30px;
+  border-radius: 6px;
+  border: 1px solid var(--blue);
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+  background: var(--panel);
+  color: var(--ink);
+}
+.btn:hover{ transform: translateY(-2px); }
+.btn.primary{
+  background: linear-gradient(180deg, var(--blood) 0%, #6e1319 100%);
+  color: #f2dcdc;
+  border-color: var(--blood-bright);
+  box-shadow: 0 0 18px rgba(161,28,36,0.35);
+}
+.btn.primary:hover{ box-shadow: 0 0 26px rgba(161,28,36,0.55); }
+.btn.secondary{ color: var(--blue-bright); }
+.btn.secondary:hover{ box-shadow: 0 0 18px rgba(74,144,194,0.3); }
+
+/* ---------- section shell ---------- */
+section{
+  padding: 8vh 6vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+h2.section-title{
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  color: var(--blue-bright);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* ---------- OC submission table ---------- */
+.table-wrap{
+  overflow-x: auto;
+  border: 1px solid var(--blue);
+  border-radius: 14px;
+  background: var(--panel);
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+thead th{
+  text-align: left;
+  padding: 16px 20px;
+  color: var(--blue-bright);
+  font-size: 1.1rem;
+  border-bottom: 2px solid var(--blue);
+  background: var(--bg2);
+}
+tbody td{
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--blue);
+  color: var(--ink-dim);
+}
+tbody tr:last-child td{ border-bottom: none; }
+tbody tr:hover td{ color: var(--ink); background: rgba(74,144,194,0.06); }
+
+/* ---------- footer ---------- */
+footer{
+  background: var(--bg2);
+  border-top: 2px solid var(--blue);
+  color: var(--ink);
+  text-align: center;
+  padding: 50px 6vw;
+  position: relative;
+  z-index: 2;
+}
+footer h2{ font-size: 1.7rem; margin-bottom: 16px; color: var(--blue-bright); }
+.footer-links{
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0 30px;
+  font-size: 1.02rem;
+  color: var(--ink-dim);
+}
+.footer-links a:hover{ color: var(--blood-bright); }
+footer .fine{ opacity: .6; font-size: .88rem; }
+
+@media (max-width: 720px){
+  .nav-links{ display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="dot"></span>GingerFlix Studios</div>
+  <div class="nav-links">
+    <a href="#game">The Game</a>
+    <a href="#submissions">OC Submissions</a>
+    <a href="#community">Community</a>
+  </div>
+</nav>
+
+<header class="hero" id="game">
+  <div class="blob" style="width:220px;height:220px;top:10%;left:6%;animation-delay:0s;"></div>
+  <div class="blob" style="width:160px;height:160px;top:60%;left:16%;animation-delay:2s;"></div>
+  <div class="blob" style="width:200px;height:200px;top:15%;right:8%;animation-delay:1s;"></div>
+  <div class="blob" style="width:130px;height:130px;top:62%;right:14%;animation-delay:3s;"></div>
+
+  <p class="eyebrow">A GingerFlix Studios Original</p>
+  <h1>ANIMAL <span class="cross">+</span> HOSPITAL: <br>CRITICAL CONDITION</h1>
+  <p class="tagline">The power keeps cutting out. Patients keep flatlining. Something in the halls isn't a patient at all. Keep them alive, keep the hospital running — if you can.</p>
+  <div class="cta-row">
+    <a class="btn primary" href="https://www.roblox.com/games/102637331644778/Animal-Hospital-Critical-Contidition">Play on Roblox</a>
+    <a class="btn secondary" href="https://animal-hospital-critical-condition.fandom.com/wiki/Animal_Hospital:_Critical_Condition_Wiki">Check on a Unfinished Fandom Wiki</a>
+  </div>
+</header>
+
+<section id="submissions">
+  <h2 class="section-title">OC Submission List</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Character Names</th>
+          <th>Class</th>
+          <th>Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer id="community">
+  <h2>Come hang out with us</h2>
+  <div class="footer-links">
+    <a href="https://www.roblox.com/communities/13453464/GingerFlix-Community#!/about">Roblox Community</a>
+    <a href="https://gingerflix-studios.fandom.com/wiki/What_is_GingerFlix_Studios">Fandom Wiki</a>
+    <a href="https://www.tiktok.com/@un_knowncookie">Unknown Cookie on TikTok</a>
+    <a href="https://www.tiktok.com/@bloomy_cali666">BloomyCali on TikTok</a>
+  </div>
+  <p class="fine">GingerFlix Studios — making games and art since 2021.</p>
+</footer>
+
+</body>
+</html>
